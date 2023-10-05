@@ -9,7 +9,7 @@ function App() {
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
-    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let str = "ABCDEFGHIJKLM NOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     if (numAllowed) {
       str += "0123456789";
@@ -18,7 +18,7 @@ function App() {
     if (charAllowed) {
       str += "~!@#$5^&*()_+`[]{}";
     }
-
+ 
     for (let i = 1; i <= str.length; i++) {
       let char = Math.random() * str.length + 1;
       pass = str.charAt(char);
@@ -44,15 +44,34 @@ function App() {
         </button>
       </div>
         <div className="flex text-sm gap-x-2">
-          <div className="flex- items-center gap-x-1">
+          <div className="flex items-center gap-x-1">
             <input
               type="range"
               min={6}
-              max={15}
+              max={18}
               value={length}
               className="cursor-pointer"
+              onChange={(e)=>{setLength(e.target.value)}}
             />
             <label>Length: {length}</label>
+          </div>
+          <div className="flex items-center gap-x-1">
+            <input
+              type="checkbox"
+              defaultChecked={numAllowed}
+              id="numberInput"
+              onChange={()=>{setNumAllowed((prev) => !prev)}}
+            />
+            <label htmlFor="numberInput">Number</label>
+          </div>
+          <div className="flex items-center gap-x-1">
+            <input
+              type="checkbox"
+              defaultChecked={charAllowed}
+              id="numberInput"
+              onChange={()=>{setCharAllowed((prev) => !prev)}}
+            />
+            <label htmlFor="characterInput">Characters</label>
           </div>
         </div>
       </div>
